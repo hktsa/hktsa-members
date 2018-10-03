@@ -18,7 +18,11 @@ export default class MemberData extends Component {
           </Typography>
           <Typography variant="subheading">
             性別：
-            {this.props.member.Sex === "M" ? "男" : this.props.member.Sex === "F" ? "女" : "你還⋯還沒填"}
+            {this.props.member.Sex === "M"
+              ? "男"
+              : this.props.member.Sex === "F"
+                ? "女"
+                : "你還⋯還沒填"}
           </Typography>
           <Typography variant="subheading">
             學校：
@@ -26,7 +30,9 @@ export default class MemberData extends Component {
           </Typography>
           <Typography variant="subheading">
             畢業年：
-            {this.props.member.GradYear === 0 ? "N/A" : this.props.member.GradYear}
+            {this.props.member.GradYear === 0
+              ? "N/A"
+              : this.props.member.GradYear}
           </Typography>
         </Paper>
       </Grid>
