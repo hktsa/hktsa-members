@@ -20,7 +20,9 @@ class App extends Component {
       email: "",
       name: "",
       member: null,
-      msg: "請輸入姓名及email來看會員編號唷"
+      msg: "請輸入姓名及email來看會員編號唷",
+      notMember: false,
+      notEmail: false
     };
     this.database = firebase.initializeApp(firebase_config).database();
   }
@@ -31,7 +33,7 @@ class App extends Component {
 
   onSearchClick = e => {
     e.preventDefault();
-    this.setState({ member: null });
+    this.setState({ member: null, notMember: false, msg: "", notEmail: false });
     this.database
       .ref("members")
       .child(this.state.name)
@@ -47,9 +49,6 @@ class App extends Component {
             .then(data => {
               if (data.val() === this.state.email) {
                 // 名字與email都對
-                this.setState({
-                  msg: this.state.name + "您好！"
-                });
                 this.database
                   .ref("members")
                   .child(this.state.name)
@@ -60,7 +59,8 @@ class App extends Component {
                 this.setState({
                   msg:
                     this.state.name +
-                    "您好！不好意思，您有在此登錄為會員，但因您的email不符合，故我們無法給您看您的資料，請確認您輸入的email是正確的，謝謝！"
+                    "您好！您所輸入的信箱與您登記的不相同，請確認是否有輸入錯誤。",
+                  notEmail: true
                 });
               }
             });
@@ -68,7 +68,9 @@ class App extends Component {
           // 名字錯
           this.setState({
             msg:
-              "不好意思，您似乎沒有在我們這裡登錄為會員，請再次確認您的姓名有無打錯（或曾改名改姓）"
+              this.state.name +
+              "您好！不好意思，您可能尚未登記成為會員，或是輸入資料有誤。",
+            notMember: true
           });
         }
       });
@@ -77,7 +79,7 @@ class App extends Component {
   render() {
     return (
       <Grid container alignItems="center" justify="center" direction="column">
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={8}>
           <Paper className="paper">
             <Grid container>
               <Grid item xs={12}>
@@ -121,6 +123,17 @@ class App extends Component {
                 <Typography variant="body1" align="center">
                   {this.state.msg}
                 </Typography>
+                {this.state.notMember ? (
+                  <Typography variant="body1" align="center">
+                    立即成為會員請<a href="google.com">點此填寫資料</a>
+                  </Typography>
+                ) : null}
+                {this.state.notEmail ? (
+                  <Typography variant="body1" align="center">
+                    忘記登記之信箱請
+                    <a href="https://www.facebook.com/roc.hktsa/">點此詢問</a>
+                  </Typography>
+                ) : null}
               </Grid>
             </Grid>
           </Paper>

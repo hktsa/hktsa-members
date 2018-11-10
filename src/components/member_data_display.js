@@ -58,7 +58,7 @@ export default class MemberData extends Component {
 
   render() {
     return (
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={8}>
         <Paper className="paper main">
           <Grid container direction="row" alignItems="center" spacing={8}>
             <Grid item xs={6}>
@@ -139,12 +139,34 @@ export default class MemberData extends Component {
               <hr />
             </Typography>
             <Typography variant="body1">
-              謝謝您完成我們的資料驗證作業！留港臺灣學生會衷心感謝您的幫助，也請您未來多多支持我們留港的活動與福利！
+              {this.state.ChiName}
+              您好！謝謝您完成資料驗證作業，協助留港臺灣學生會建立完整的會員名冊。
+              以下是本次機票優惠活動辦法：
+              <br />
+              中華航空公司香港分公司提供兩個套優惠方案給留港臺灣學生會會員：
+              <br />
+              <br />
+              1. 專屬企業帳號
+              <blockquote>
+                ＊為維護會員權利，請不要將這份帳號密碼外洩＊
+                <br />
+                至中華航空公司官方網站登入該組帳號密碼訂購機票，可享有機票優惠，時段及目的地無限制。優惠以中華航空公司香港分公司公告為主。
+                <br />
+                （首頁＞訂位購票＞企業會員購票）
+                <br />
+                注意：優惠僅限於香港出發之航班。
+              </blockquote>
+              2. 學生機票優惠
+              <blockquote>
+                即學生機票，
+                <a href="https://www.china-airlines.com/tw/zh">詳請見此</a>
+              </blockquote>
+              感謝中華航空公司香港分公司提供優惠，中華航空公司香港分公司保有更改權利
             </Typography>
             {this.state.GradYear > 2017 ? (
               <div>
                 <hr />
-                <Typography variant="body1">
+                <Typography variant="body1" style={{ textAlign: "center" }}>
                   以下是您的留港機票優惠帳號密碼，此組帳密僅供留港會員使用，請小心收著別被人看到啦！
                 </Typography>
                 <Grid container direction="row" alignItems="center">
@@ -181,10 +203,13 @@ export default class MemberData extends Component {
               資料未完成
             </Typography>
             <hr />
-            <Typography variant="body1">
-              請您到
-              <a href="https://goo.gl/forms/O0XUdM1jQWcj5JMT2">這個表單</a>
-              填寫資料，我們將盡快為您更新！
+            <Typography variant="body1" style={{ textAlign: "center" }}>
+              {this.state.ChiName}您好！
+            </Typography>
+            <Typography variant="body1" style={{ textAlign: "center" }}>
+              您的會員資料登錄不完全，請至
+              <a href="https://goo.gl/forms/O0XUdM1jQWcj5JMT2">表單</a>
+              填寫資料，以享有會員專屬優惠。
             </Typography>
           </Paper>
         )}
